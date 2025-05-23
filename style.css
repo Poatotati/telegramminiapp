@@ -1,0 +1,109 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #181c24;
+    color: #f6f6f6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+header.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #232735;
+    padding: 18px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+.logo {
+    height: 48px;
+    width: 48px;
+    margin-right: 18px;
+    border-radius: 8px;
+    background: #1c1f28;
+    object-fit: contain;
+}
+.banner-title {
+    font-size: 1.6em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #e8eaf6;
+}
+#main-content {
+    max-width: 480px;
+    margin: 32px auto 0 auto;
+    padding: 0 12px;
+}
+.btn, .category-btn, .product-btn, .back-btn {
+    display: block;
+    width: 100%;
+    background: #232735;
+    color: #e8eaf6;
+    border: none;
+    border-radius: 8px;
+    margin: 16px 0;
+    padding: 20px 0;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.btn:hover, .category-btn:hover, .product-btn:hover, .back-btn:hover {
+    background: #2e3342;
+    color: #4fd1c5;
+    transform: translateY(-2px) scale(1.02);
+}
+.product-card {
+    background: #22242f;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    padding: 24px 18px;
+    margin: 24px 0;
+    text-align: center;
+    animation: fadeIn 0.2s;
+}
+.product-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    background: #181c24;
+}
+.product-card .product-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 12px 0 6px 0;
+}
+.product-card .product-price {
+    font-size: 1.1em;
+    color: #4fd1c5;
+    font-weight: 500;
+}
+.back-btn {
+    margin-top: 22px;
+    background: #20232c;
+    color: #bdbdbd;
+    font-size: 1em;
+    padding: 14px 0;
+}
+@media (max-width: 600px) {
+    header.banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 10px;
+    }
+    .logo {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    #main-content {
+        margin-top: 18px;
+        padding: 0 4px;
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
