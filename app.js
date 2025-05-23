@@ -51,6 +51,25 @@ const products = {
     // ... autres catégories ...
   },
   2: { // Féstif
+    1: [ // Kétamines
+      {
+        id: 1,
+        name: 'Ketamine Needles',
+        price: [
+          { format: '10g', value: '80€' },
+          { format: '25g', value: '150€' },
+          { format: '50g', value: '250€' },
+          { format: '100g', value: '400€' },
+          { format: '250g', value: '850€' },
+          { format: '500g', value: '1.450€' },
+          { format: '1.000g', value: '2.700€' }
+        ],
+        images: [
+          'https://github.com/Poatotati/telegramminiapp/blob/main/Screenshot%202025-05-23%2019.33.04.png?raw=true',
+          'https://github.com/Poatotati/telegramminiapp/blob/main/Screenshot%202025-05-23%2019.33.17.png?raw=true'
+        ]
+      }
+    ],
     9: [ // Champignon Hallucinogène
       {
         id: 1,
@@ -118,11 +137,13 @@ function gotoProduct(typeId, catId, prodId) {
   const prod = products[typeId][catId].find(p => p.id === prodId);
   setMainContent(`
     <div class="product-card">
-      <img src="${prod.image}" alt="${prod.name}">
+      ${prod.images ? `<div style='display:flex;gap:14px;justify-content:center;margin-bottom:12px;'>${prod.images.map(img => `<img src="${img}" alt="${prod.name}" style="width:120px;height:120px;object-fit:cover;border-radius:10px;">`).join('')}</div>` : `<img src="${prod.image}" alt="${prod.name}">`}
       <div class="product-name">${prod.name}</div>
       <div class="product-price">
         ${Array.isArray(prod.price) ? prod.price.map(p => `<div>${p.format} : <b>${p.value}</b></div>`).join('') : prod.price}
       </div>
+      ${prod.name === 'Ketamine Needles' ? `<button class='btn' style='margin:20px auto 10px auto;max-width:300px;' onclick='showBulkPrices()'>Plus grosses quantités</button>
+      <div id='bulk-prices' style='display:none;margin-top:16px;text-align:center;'></div>` : ''}
     </div>
     <button class="back-btn" onclick="goBack()">Retour</button>
   `);
@@ -149,6 +170,21 @@ if (logo) logo.onclick = renderMain;
 if (window.Telegram && window.Telegram.WebApp) {
   window.Telegram.WebApp.ready();
   window.Telegram.WebApp.expand();
+}
+
+// --- Affichage des prix plus grosses quantités pour Ketamine Needles ---
+function showBulkPrices() {
+  const bulk = [
+    { format: '5kg', value: 9000 },
+    { format: '10kg', value: 17000 },
+    { format: '20kg', value: 30000 }
+  ];
+  const bulkPlus = bulk.map(p => {
+    const price = Math.round(p.value * 1.15);
+    return `<div style='margin:8px 0;'>🟩 <b>${p.format}</b> : <b>${price.toLocaleString()}€</b></div>`;
+  }).join('');
+  document.getElementById('bulk-prices').style.display = 'block';
+  document.getElementById('bulk-prices').innerHTML = `<div style='font-size:1.13em;font-weight:500;margin-bottom:10px;'>Prix majorés de 15% :</div>${bulkPlus}`;
 }
 
 // --- Initialisation ---
